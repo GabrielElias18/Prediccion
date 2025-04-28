@@ -14,13 +14,16 @@ public class PrediccionController {
     public PrediccionController() throws Exception {
         this.prediccionService = new PrediccionService();
     }
-    @PostMapping("/predecir")
-    public Map<String, Double> predecir(@RequestBody Map<String, Double> datos) throws Exception {
-        double precio = datos.get("precio_venta");
-        double cantidad = datos.get("cantidad_disponible");
-        double historico = datos.get("historico_ventas");
-        double tiempo = datos.get("tiempo_en_mercado");
 
-        return prediccionService.obtenerProbabilidades(precio, cantidad, historico, tiempo);
+    @PostMapping("/predecir")
+    public Map<String, Double> predecir(@RequestBody Map<String, Object> datos) throws Exception {
+        double precioVenta = ((Number) datos.get("precio_venta")).doubleValue();
+        double precioCompra = ((Number) datos.get("precio_compra")).doubleValue();
+        double cantidad = ((Number) datos.get("cantidad_disponible")).doubleValue();
+        double historico = ((Number) datos.get("historico_ventas")).doubleValue();
+        double tiempo = ((Number) datos.get("tiempo_en_mercado")).doubleValue();
+        String categoria = (String) datos.get("categoria");
+
+        return prediccionService.obtenerProbabilidades(precioVenta, precioCompra, cantidad, historico, tiempo, categoria);
     }
 }
