@@ -3,3 +3,5 @@ Celulares
 Consolas
 Laptops
 Accesorios
+Perifericos
+Monitores y Pantallas
